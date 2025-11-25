@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guida Completa: Container, Padding e Layout CSS</title>
+    <style>
+        :root {
+            --color-cream-50: rgba(252, 252, 249, 1);
+            --color-cream-100: rgba(255, 255, 253, 1);
+            --color-slate-900: rgba(19, 52, 59, 1);
+            --color-slate-500: rgba(98, 108, 113, 1);
+            --color-teal-500: rgba(33, 128, 141, 1);
+            --color-teal-600: rgba(29, 116, 128, 1);
+            --color-brown-600-rgb: 94, 82, 64;
+            --color-teal-500-rgb: 33, 128, 141;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --color-background: rgba(31, 33, 33, 1);
+                --color-surface: rgba(38, 40, 40, 1);
+                --color-text: rgba(245, 245, 245, 1);
+                --color-border: rgba(119, 124, 124, 0.3);
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--color-cream-50);
+            color: var(--color-slate-900);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        h2 {
+            font-size: 24px;
+            font-weight: 600;
+            margin: 30px 0 15px 0;
+            color: var(--color-teal-600);
+        }
+
+        h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin: 20px 0 10px 0;
+        }
+
+        .intro {
+            background: var(--color-cream-100);
+            border: 2px solid var(--color-teal-500);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .section {
+            background: var(--color-cream-100);
+            border: 1px solid rgba(var(--color-brown-600-rgb), 0.12);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+
+        .example-box {
+            border: 2px dashed var(--color-teal-500);
+            border-radius: 8px;
+            padding: 20px;
+            margin: 15px 0;
+            background: rgba(var(--color-teal-500-rgb), 0.05);
+        }
+
+        .demo-container {
+            margin: 20px 0;
+            padding: 20px;
+            background: #f0f0f0;
+            border-radius: 8px;
+        }
+
+        /* ESEMPI DI CONTAINER HTML */
+        .demo-div {
+            background: #ffebee;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ef5350;
+        }
+
+        .demo-section {
+            background: #e3f2fd;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #2196f3;
+        }
+
+        .demo-article {
+            background: #e8f5e9;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #4caf50;
+        }
+
+        .demo-aside {
+            background: #fff3e0;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #ff9800;
+        }
+
+        .demo-header {
+            background: #f3e5f5;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #9c27b0;
+        }
+
+        .demo-footer {
+            background: #fce4ec;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #e91e63;
+        }
+
+        .demo-main {
+            background: #e0f2f1;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #009688;
+        }
+
+        .demo-nav {
+            background: #fff9c4;
+            padding: 15px;
+            margin: 10px 0;
+            border: 2px solid #fbc02d;
+        }
+
+        /* BOX MODEL DEMO */
+        .box-model-demo {
+            display: inline-block;
+            margin: 20px;
+        }
+
+        .content-box {
+            width: 200px;
+            height: 100px;
+            background: #ffccbc;
+            border: 10px solid #ff5722;
+            padding: 20px;
+            margin: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+
+        .padding-demo {
+            background: #b2dfdb;
+            border: 3px solid #009688;
+        }
+
+        .padding-10 {
+            padding: 10px;
+        }
+
+        .padding-20 {
+            padding: 20px;
+        }
+
+        .padding-30 {
+            padding: 30px;
+        }
+
+        .margin-demo {
+            background: #d1c4e9;
+            border: 3px solid #673ab7;
+            padding: 10px;
+        }
+
+        .margin-10 {
+            margin: 10px;
+        }
+
+        .margin-20 {
+            margin: 20px;
+        }
+
+        .margin-30 {
+            margin: 30px;
+        }
+
+        /* APPROCCI DI STYLING */
+        .approach-global body {
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        .styled-container {
+            font-family: 'Courier New', monospace;
+            color: #e91e63;
+            background: #fce4ec;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 15px 0;
+        }
+
+        .nested-container {
+            background: #fff;
+            padding: 15px;
+            border: 2px solid #e91e63;
+            border-radius: 5px;
+        }
+
+        code {
+            background: rgba(var(--color-brown-600-rgb), 0.1);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            border: 1px solid rgba(var(--color-brown-600-rgb), 0.2);
+            padding: 12px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background: var(--color-teal-500);
+            color: white;
+            font-weight: 600;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background: rgba(var(--color-teal-500-rgb), 0.05);
+        }
+
+        .highlight {
+            background: rgba(var(--color-teal-500-rgb), 0.15);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-weight: 600;
+        }
+
+        .flexbox-demo {
+            display: flex;
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .flex-item {
+            flex: 1;
+            background: #90caf9;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .grid-demo {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin: 15px 0;
+        }
+
+        .grid-item {
+            background: #ce93d8;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="main-container">
+        <h1>🎨 Guida Completa: Container, Padding e Layout CSS</h1>
+        
+        <div class="intro">
+            <h3>📚 Cosa Imparerai</h3>
+            <p><strong>1. Padding e Margin</strong> sono proprietà CSS, NON elementi HTML</p>
+            <p><strong>2. Container</strong> sono elementi HTML che contengono altri elementi</p>
+            <p><strong>3. Approcci di styling</strong> per applicare stili a diverse sezioni</p>
+        </div>
+
+        <!-- SEZIONE 1: PADDING VS MARGIN -->
+        <div class="section">
+            <h2>1️⃣ Padding e Margin: Proprietà CSS</h2>
+            
+            <div class="example-box">
+                <h3>🔑 Risposta alla Tua Domanda</h3>
+                <p><strong>Padding e Margin sono PROPRIETÀ CSS</strong>, non elementi HTML!</p>
+                <p>Si scrivono nel CSS per controllare lo spazio attorno agli elementi.</p>
+            </div>
+
+            <h3>📦 Box Model CSS</h3>
+            <p>Ogni elemento HTML è una "scatola" composta da 4 strati:</p>
+            
+            <div class="demo-container">
+                <div class="content-box">
+                    CONTENUTO
+                </div>
+                <p style="text-align: center; margin-top: 10px;">
+                    <strong>Arancione chiaro</strong> = Content (contenuto)<br>
+                    <strong>Arancione scuro</strong> = Border (bordo)<br>
+                    <strong>Spazio interno</strong> = Padding<br>
+                    <strong>Spazio esterno</strong> = Margin
+                </p>
+            </div>
+
+            <h3>Differenza Padding vs Margin</h3>
+            <table class="comparison-table">
+                <tr>
+                    <th>Aspetto</th>
+                    <th>Padding (Spazio Interno)</th>
+                    <th>Margin (Spazio Esterno)</th>
+                </tr>
+                <tr>
+                    <td><strong>Dove sta</strong></td>
+                    <td>DENTRO l'elemento (tra contenuto e bordo)</td>
+                    <td>FUORI l'elemento (tra elementi diversi)</td>
+                </tr>
+                <tr>
+                    <td><strong>Sfondo</strong></td>
+                    <td>✅ Mostra lo sfondo dell'elemento</td>
+                    <td>❌ NON mostra sfondo (trasparente)</td>
+                </tr>
+                <tr>
+                    <td><strong>Sintassi CSS</strong></td>
+                    <td><code>padding: 20px;</code></td>
+                    <td><code>margin: 20px;</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Quando usare</strong></td>
+                    <td>Spazio tra contenuto e bordo</td>
+                    <td>Spazio tra elementi diversi</td>
+                </tr>
+            </table>
+
+            <h3>Esempi Visivi: Padding</h3>
+            <div class="demo-container">
+                <div class="padding-demo padding-10">Padding 10px</div>
+                <div class="padding-demo padding-20">Padding 20px</div>
+                <div class="padding-demo padding-30">Padding 30px</div>
+            </div>
+
+            <h3>Esempi Visivi: Margin</h3>
+            <div class="demo-container">
+                <div class="margin-demo margin-10">Margin 10px</div>
+                <div class="margin-demo margin-20">Margin 20px</div>
+                <div class="margin-demo margin-30">Margin 30px</div>
+            </div>
+        </div>
+
+        <!-- SEZIONE 2: CONTAINER HTML -->
+        <div class="section">
+            <h2>2️⃣ Container: Elementi HTML</h2>
+            
+            <div class="example-box">
+                <h3>🔑 Risposta alla Tua Domanda</h3>
+                <p><strong>Container sono ELEMENTI HTML</strong> che contengono altri elementi.</p>
+                <p>Si scrivono nell'HTML: <code>&lt;div&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;article&gt;</code>, ecc.</p>
+            </div>
+
+            <h3>📋 Lista Completa Container HTML</h3>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Elemento</th>
+                    <th>Tipo</th>
+                    <th>Quando Usare</th>
+                    <th>Semantico?</th>
+                </tr>
+                <tr>
+                    <td><code>&lt;div&gt;</code></td>
+                    <td>Generico</td>
+                    <td>Contenitore generico senza significato specifico</td>
+                    <td>❌ No</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;section&gt;</code></td>
+                    <td>Semantico</td>
+                    <td>Sezione tematica del documento (es: "Chi Siamo", "Servizi")</td>
+                    <td>✅ Sì</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;article&gt;</code></td>
+                    <td>Semantico</td>
+                    <td>Contenuto indipendente (articolo blog, notizia, post)</td>
+                    <td>✅ Sì</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;aside&gt;</code></td>
+                    <td>Semantico</td>
+                    <td>Contenuto correlato ma secondario (sidebar, note)</td>
+                    <td>✅ Sì</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;header&gt;</code></td>
+                    <td>Semantico</td>
+                    <td>Intestazione di pagina o sezione</td>
+                    <td>✅ Sì</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;footer&gt;</code></td>
+                    <td>Semantico</td>
+                    <td>Piè di pagina</td>
+                    <td>✅ Sì</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;main&gt;</code></td>
+                    <td>Semantico</td>
+                    <td>Contenuto principale della pagina (solo 1 per pagina)</td>
+                    <td>✅ Sì</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;nav&gt;</code></td>
+                    <td>Semantico</td>
+                    <td>Menu di navigazione</td>
+                    <td>✅ Sì</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;figure&gt;</code></td>
+                    <td>Semantico</td>
+                    <td>Contenuto auto-contenuto con caption (immagini, diagrammi)</td>
+                    <td>✅ Sì</td>
+                </tr>
+                <tr>
+                    <td><code>&lt;form&gt;</code></td>
+                    <td>Funzionale</td>
+                    <td>Contenitore per input utente (form, questionari)</td>
+                    <td>✅ Sì</td>
+                </tr>
+            </table>
+
+            <h3>Esempi Visivi dei Container</h3>
+            <div class="demo-container">
+                <div class="demo-div">
+                    &lt;div&gt; - Contenitore generico (rosso)
+                </div>
+                
+                <section class="demo-section">
+                    &lt;section&gt; - Sezione tematica (blu)
+                </section>
+                
+                <article class="demo-article">
+                    &lt;article&gt; - Articolo indipendente (verde)
+                </article>
+                
+                <aside class="demo-aside">
+                    &lt;aside&gt; - Contenuto laterale (arancione)
+                </aside>
+                
+                <header class="demo-header">
+                    &lt;header&gt; - Intestazione (viola)
+                </header>
+                
+                <footer class="demo-footer">
+                    &lt;footer&gt; - Piè di pagina (rosa)
+                </footer>
+                
+                <main class="demo-main">
+                    &lt;main&gt; - Contenuto principale (verde acqua)
+                </main>
+                
+                <nav class="demo-nav">
+                    &lt;nav&gt; - Navigazione (giallo)
+                </nav>
+            </div>
+        </div>
+
+        <!-- SEZIONE 3: APPROCCI DI STYLING -->
+        <div class="section">
+            <h2>3️⃣ Approcci per Applicare Stili Diversi</h2>
+            
+            <div class="example-box">
+                <h3>💡 Quello che ha detto il tuo professore</h3>
+                <p>NON devi applicare lo stesso stile a TUTTO il sito!</p>
+                <p>Puoi creare <span class="highlight">container specifici</span> con stili diversi.</p>
+            </div>
+
+            <h3>Approccio 1: Stile Globale (su body)</h3>
+            <p><strong>Cosa fa:</strong> Applica lo stesso stile a TUTTO il sito</p>
+            <pre><code>body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background: white;
+}</code></pre>
+            <p>✅ <strong>Quando usare:</strong> Per stili di base comuni a tutto il sito</p>
+            <p>❌ <strong>Limite:</strong> Tutto ha lo stesso aspetto</p>
+
+            <h3>Approccio 2: Container con Stile Specifico (RACCOMANDATO)</h3>
+            <p><strong>Cosa fa:</strong> Crei un <code>&lt;div&gt;</code> o <code>&lt;section&gt;</code> con una classe CSS personalizzata</p>
+            
+            <div class="styled-container">
+                <h4>📦 Questo è un Container Speciale</h4>
+                <p>Ha font, colore e sfondo DIVERSI dal resto della pagina!</p>
+                <div class="nested-container">
+                    <p>Puoi anche annidare container dentro altri container!</p>
+                </div>
+            </div>
+
+            <p><strong>Codice HTML:</strong></p>
+            <pre><code>&lt;div class="styled-container"&gt;
+    &lt;h4&gt;Titolo speciale&lt;/h4&gt;
+    &lt;p&gt;Contenuto con stile diverso&lt;/p&gt;
+&lt;/div&gt;</code></pre>
+
+            <p><strong>Codice CSS:</strong></p>
+            <pre><code>.styled-container {
+    font-family: 'Courier New', monospace;
+    color: #e91e63;
+    background: #fce4ec;
+    padding: 20px;
+    border-radius: 8px;
+}</code></pre>
+
+            <h3>Approccio 3: Più Container con Stili Diversi</h3>
+            <p><strong>Cosa fa:</strong> Ogni sezione ha il suo stile</p>
+            
+            <div class="example-box">
+                <div style="background: #e3f2fd; padding: 15px; margin: 10px 0; border-radius: 8px;">
+                    <strong>Sezione Azzurra</strong> - font Arial, sfondo blu chiaro
+                </div>
+                <div style="background: #fff3e0; padding: 15px; margin: 10px 0; border-radius: 8px; font-family: Georgia, serif;">
+                    <strong>Sezione Arancione</strong> - font Georgia, sfondo arancione
+                </div>
+                <div style="background: #f3e5f5; padding: 15px; margin: 10px 0; border-radius: 8px; font-family: 'Courier New', monospace;">
+                    <strong>Sezione Viola</strong> - font Courier, sfondo viola
+                </div>
+            </div>
+
+            <h3>Approccio 4: Ereditarietà CSS</h3>
+            <p><strong>Cosa fa:</strong> Gli elementi figli ereditano gli stili dal genitore</p>
+            <pre><code>&lt;div class="parent-container"&gt;
+    &lt;p&gt;Questo testo eredita il font dal parent&lt;/p&gt;
+    &lt;span&gt;Anche questo!&lt;/span&gt;
+&lt;/div&gt;</code></pre>
+            <p>Se il <code>.parent-container</code> ha <code>font-family: Arial</code>, tutti i figli useranno Arial (a meno che non lo sovrascrivi).</p>
+        </div>
+
+        <!-- SEZIONE 4: LAYOUT MODERNI -->
+        <div class="section">
+            <h2>4️⃣ Layout Moderni con Container</h2>
+
+            <h3>Flexbox Layout</h3>
+            <p>Dispone elementi in righe o colonne flessibili</p>
+            <div class="flexbox-demo">
+                <div class="flex-item">Item 1</div>
+                <div class="flex-item">Item 2</div>
+                <div class="flex-item">Item 3</div>
+            </div>
+            <pre><code>.flexbox-demo {
+    display: flex;
+    gap: 10px;
+}
+
+.flex-item {
+    flex: 1;
+}</code></pre>
+
+            <h3>Grid Layout</h3>
+            <p>Dispone elementi in una griglia bidimensionale</p>
+            <div class="grid-demo">
+                <div class="grid-item">1</div>
+                <div class="grid-item">2</div>
+                <div class="grid-item">3</div>
+                <div class="grid-item">4</div>
+                <div class="grid-item">5</div>
+                <div class="grid-item">6</div>
+            </div>
+            <pre><code>.grid-demo {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}</code></pre>
+        </div>
+
+        <!-- SEZIONE 5: RIASSUNTO -->
+        <div class="section">
+            <h2>5️⃣ Riassunto Finale</h2>
+            
+            <table class="comparison-table">
+                <tr>
+                    <th>Concetto</th>
+                    <th>Cosa È</th>
+                    <th>Dove Si Scrive</th>
+                    <th>Esempio</th>
+                </tr>
+                <tr>
+                    <td><strong>Padding</strong></td>
+                    <td>Proprietà CSS (spazio interno)</td>
+                    <td>Nel CSS</td>
+                    <td><code>padding: 20px;</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Margin</strong></td>
+                    <td>Proprietà CSS (spazio esterno)</td>
+                    <td>Nel CSS</td>
+                    <td><code>margin: 20px;</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Container</strong></td>
+                    <td>Elemento HTML</td>
+                    <td>Nell'HTML</td>
+                    <td><code>&lt;div&gt;</code>, <code>&lt;section&gt;</code></td>
+                </tr>
+                <tr>
+                    <td><strong>Classe CSS</strong></td>
+                    <td>Identificatore per applicare stili</td>
+                    <td>HTML (attributo) + CSS (stili)</td>
+                    <td><code>class="mio-container"</code></td>
+                </tr>
+            </table>
+
+            <div class="example-box">
+                <h3>🎯 Risposta Definitiva alla Tua Domanda</h3>
+                <p><strong>1. Padding e Margin = CSS (proprietà)</strong></p>
+                <p><strong>2. Container = HTML (elementi tipo &lt;div&gt;, &lt;section&gt;)</strong></p>
+                <p><strong>3. Per stili diversi:</strong> Usa container con classi CSS diverse!</p>
+                <p><strong>4. Non serve applicare tutto a body:</strong> Puoi stilizzare ogni sezione separatamente!</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
