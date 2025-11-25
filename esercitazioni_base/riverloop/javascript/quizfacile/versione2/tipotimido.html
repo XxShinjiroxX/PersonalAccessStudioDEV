@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz Facile - 5 Domande</title>
+    <!-- COLLEGAMENTO AL FILE CSS ESTERNO -->
+    <link rel="stylesheet" href="tipoganzo.css">
+</head>
+<body>
+    <div class="container">
+        <!-- INTESTAZIONE DEL QUIZ -->
+        <header>
+            <h1>🧠 Quiz Facile</h1>
+            <p>Rispondi alle 5 domande e guadagna punti!</p>
+        </header>
+
+        <!-- BARRA INFO: Numero domanda, Progresso e Punteggio -->
+        <div class="quiz-info">
+            <span class="question-number" id="questionNumber">Domanda 1 di 5</span>
+            <div class="progress-bar">
+                <div class="progress-fill" id="progressFill"></div>
+            </div>
+            <span class="score" id="scoreDisplay">Punti: 0/50</span>
+        </div>
+
+        <!-- CONTENITORE DOMANDE -->
+        <div id="quizContainer">
+            <!-- Le domande verranno inserite qui dal JavaScript -->
+        </div>
+
+        <!-- PULSANTI AZIONE -->
+        <div class="button-group">
+            <button class="btn-next" id="nextBtn" disabled>Prossima Domanda</button>
+            <button class="btn-reset" id="resetBtn">Ricomincia</button>
+        </div>
+
+        <!-- RISULTATI FINALI -->
+        <div class="results-container" id="resultsContainer">
+            <h2>Quiz Completato! 🎉</h2>
+            <div class="final-score" id="finalScore">0/50</div>
+            <div class="results-message" id="resultMessage"></div>
+            <div class="results-details" id="resultsDetails"></div>
+            <button class="btn-reset" id="restartBtn" style="width: 100%; margin-top: 20px;">Riprova</button>
+        </div>
+    </div>
+
+    <!-- COLLEGAMENTO AL FILE JAVASCRIPT -->
+    <script src="tipobruto.js"></script>
+</body>
+</html>
